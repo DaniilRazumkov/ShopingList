@@ -10,6 +10,9 @@ data class ShopItem(
 
     var id:Int=UNDEFINED_id
 ){
+
+
+
     companion object{
         const val UNDEFINED_id=-1
     }
