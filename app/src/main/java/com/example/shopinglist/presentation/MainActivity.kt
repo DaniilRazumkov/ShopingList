@@ -13,7 +13,7 @@ import com.example.shopinglist.domain.ShopItem
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
-private lateinit var adapter: ShopListAdapter
+    private lateinit var adapter: ShopListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,14 +21,26 @@ private lateinit var adapter: ShopListAdapter
         setupRecyclerView()
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.shopList.observe(this) {
-            adapter.shopList=it
+            adapter.shopList = it
 
         }
     }
-private fun setupRecyclerView(){
-    val rvShopList=findViewById<RecyclerView>(R.id.rv_shop_list)
-    adapter= ShopListAdapter()
-    rvShopList.adapter=adapter
-}
 
+    private fun setupRecyclerView() {
+        val rvShopList = findViewById<RecyclerView>(R.id.rv_shop_list)
+        with(rvShopList) {
+            adapter = ShopListAdapter()
+            adapter = adapter
+            recycledViewPool.setMaxRecycledViews(
+                ShopListAdapter.VIEW_TYPE_ENABLED,
+                ShopListAdapter.MAX_POOL_SIZE
+            )
+            recycledViewPool.setMaxRecycledViews(
+                ShopListAdapter.VIEW_TYPE_DISABLED,
+                ShopListAdapter.MAX_POOL_SIZE
+            )
+
+        }
+
+    }
 }
