@@ -6,6 +6,7 @@ import com.example.shopinglist.domain.ShopItem
 import com.example.shopinglist.domain.ShopListRepository
 import java.lang.RuntimeException
 import java.util.*
+import kotlin.random.Random
 
 object ShopListRepositoryImpl : ShopListRepository {
 
@@ -16,8 +17,8 @@ object ShopListRepositoryImpl : ShopListRepository {
     private var autoIncrementId = 0
 
     init {
-        for (i in 0 until 10) {
-            val item = ShopItem("name $i", i, true)
+        for (i in 0 until 1000) {
+            val item = ShopItem("name $i", i, Random.nextBoolean())
             addShopItem(item)
         }
     }
